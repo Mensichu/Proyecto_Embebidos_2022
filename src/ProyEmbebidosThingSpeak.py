@@ -320,6 +320,7 @@ def thingSpeak():
 		enviar = requests.get("https://api.thingspeak.com/update?api_key=TNWYC5DOCHOKE63R&field1="
 		+str(Temp_actual)+"&field2="+str(Hum_actual)+"&field3="
 		+str(Luz_actual))
+		print("----------------------------Datos enviados a thingspeak!")
 
 
 
