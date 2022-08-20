@@ -315,7 +315,7 @@ def thingSpeak():
 	time_now=datetime.utcnow() #Tiempo actual
 	print("Tiempo: "+str(time_now.minute)+":"+str(time_now.second))
 	#	Envia datos a thingspeak cada media hora del dia
-	if  time_now.minute==0 or time_now.minute==30 and time_now.second==0:
+	if  (time_now.minute==0 or time_now.minute==30) and (time_now.second==0):
 		#Query que envia los datos a thingspeak medainte el canal y el APIKey
 		enviar = requests.get("https://api.thingspeak.com/update?api_key=TNWYC5DOCHOKE63R&field1="
 		+str(Temp_actual)+"&field2="+str(Hum_actual)+"&field3="
