@@ -3,6 +3,7 @@ import time
 import board
 import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
 #Thingspeak
+from datetime import datetime
 import requests
 t_TS=0
 
@@ -287,10 +288,9 @@ blink = True
 
 
 def thingSpeak():
-	global t_TS
-	t_TS=t_TS+1 if t_TS<3600 else 0
-	Send = True if t_TS==3600 else False
-	if Send :
+	time_now=datetime.utcnow()
+	print("Tiempo: "str(time_now.minute)+":"+str(time_now.second))
+	if  time_now.minute==0 or time_now.minute==30 and time_now.second==0:
 		enviar = requests.get("https://api.thingspeak.com/update?api_key=TNWYC5DOCHOKE63R&field1="
 		+str(Temp_actual)+"&field2="+str(Hum_actual)+"&field3="
 		+str(Luz_actual))
