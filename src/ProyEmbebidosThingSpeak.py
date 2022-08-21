@@ -302,7 +302,7 @@ def serialCom():
 		Tiempo_actual=datos[0].replace("'b","")
 		Temp_actual= int(datos[1])
 		Hum_actual = int(datos[2])
-		Luz_actual = int(datos[3][0:2]) if len(datos[3])==7 else int(datos[3][0:1])
+		Luz_actual = int(datos[3][0:2]) if len(datos[3])==7 else 100 if len(datos[3])>=8 else int(datos[3][0:1])
 		Luz_actual = 0 if Luz_actual < 0 else 100 if Luz_actual>100 else Luz_actual
 	else:
 		print("Fallo en split!")
