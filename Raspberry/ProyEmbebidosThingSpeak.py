@@ -313,6 +313,7 @@ blink = True
 
 
 def thingSpeak():
+	global Temp_actual,Hum_actual,Luz_actual
 	time_now=datetime.utcnow() #Tiempo actual
 	print("Tiempo: "+str(time_now.minute)+":"+str(time_now.second))
 	#	Envia datos a thingspeak cada media hora del dia
@@ -324,8 +325,10 @@ def thingSpeak():
 		print("----------------------------Datos enviados a thingspeak!")
 
 def ubidotsSendData():
+	global Temp_actual,Hum_actual,Luz_actual
 	time_now=datetime.utcnow() #Tiempo actual
-	if  (time_now.second==0):
+	#	Cada 5 minutos
+	if  (time_now.minute % 5 == 0 and time_now.second==0):
 		ubidots.enviarDatosUbidots(Temp_actual,Hum_actual,Luz_actual)
 
 while True:
