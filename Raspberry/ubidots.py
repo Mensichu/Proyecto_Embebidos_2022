@@ -40,7 +40,7 @@ def post_request(payload):
     return True
 
 
-def enviarDatosUbidots(value_1,value_2,value_3)
+def enviarDatosUbidots(value_1,value_2,value_3):
     payload = build_payload(value_1,value_2,value_3)
     post_request(payload)
     
