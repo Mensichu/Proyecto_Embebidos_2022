@@ -5,7 +5,8 @@ import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
 #Thingspeak
 from datetime import datetime
 import requests
-
+# Ubidots
+import ubidots
 
 #Variables de datos en tiempo real
 Tiempo_actual="11/1/2011-11:11:11"
@@ -322,18 +323,21 @@ def thingSpeak():
 		+str(Luz_actual))
 		print("----------------------------Datos enviados a thingspeak!")
 
-
-
+def ubidotsSendData():
+	time_now=datetime.utcnow() #Tiempo actual
+	if  (time_now.second==0):
+		ubidots.enviarDatosUbidots(Temp_actual,Hum_actual,Luz_actual)
 
 while True:
 	#Pregunta primeramente por comunicacion con el arduino
 	compruebaConexion()
 	if com:
 		#Si hay comunicacion con el arduino
-		serialCom() 	#Actualiza los datos
-		step_menus()	#Interfaz de menu mediante botones
-		thingSpeak()	#Envia los datos a thingspeak
-		alarma()		#Prende rgb si excede los rangos
+		serialCom() 		#Actualiza los datos
+		step_menus()		#Interfaz de menu mediante botones
+		thingSpeak()		#Envia los datos a thingspeak
+		ubidotsSendData()	#Envia datos a ubidots
+		alarma()			#Prende rgb si excede los rangos
 	else:
 		# No hay comunicacion con el arduino
 		lcd.clear()		# Limpia la pantalla
