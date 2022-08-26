@@ -47,9 +47,12 @@ lcd.cursor_position(0,1)
 msg2 = "SISTEMAS EMBEBIDOS"
 lcd.message = msg2
 #Hacemos un scroll de animacion
-for i in range(5):
-	time.sleep(0.3)
+for i in range(3):
+	time.sleep(0.6)
 	lcd.move_left()
+for i in range(3):
+	time.sleep(0.6)
+	lcd.move_right()
 
 lcd.color = [0,0,0]
 
@@ -72,7 +75,6 @@ def compruebaConexion():
 registroBackup="2022/7/10-10:30:12,11,11,11"
 
 
-
 #Menu z: los 3 menus principales
 #2
 def titulo():
@@ -84,7 +86,7 @@ def titulo():
 	fechaDatos=fecha.split(":")
 	minDatos=fechaDatos[1] if int(fechaDatos[1])>9 else "0"+fechaDatos[1]
 	segDatos=fechaDatos[2] if int(fechaDatos[2])>9 else "0"+fechaDatos[2]
-	fechaLcd= str(fechaDatos[0][2:20])+":"str(minDatos)+":"+str(segDatos)
+	fechaLcd= str(fechaDatos[0][2:20])+":"+str(minDatos)+":"+str(segDatos)
 	lcd.message= str(fechaLcd)
 
 #1
@@ -316,7 +318,9 @@ def serialCom():
 	print(registro)
 
 blink = True
-
+compruebaConexion()
+serialCom()
+lcd.clear()
 
 def thingSpeak():
 	global Temp_actual,Hum_actual,Luz_actual
