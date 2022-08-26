@@ -36,6 +36,23 @@ lcd_rows= 2
 #Coneccion al bus I2C
 i2c= board.I2C()
 
+#Inicializamos la clase LCD
+lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
+
+# Animacion extra en el LCD
+lcd.clear()
+msg = "PROYECTO DE"
+lcd.message = msg
+lcd.cursor_position(0,1)
+msg2 = "SISTEMAS EMBEBIDOS"
+lcd.message = msg2
+#Hacemos un scroll de animacion
+for i in range(5):
+	time.sleep(0.3)
+	lcd.move_left()
+
+lcd.color = [0,0,0]
+
 
 #Comunicacion serial
 com = True
@@ -54,23 +71,7 @@ def compruebaConexion():
 #ser = serial.Serial('/dev/ttyUSB0',9600,5)
 registroBackup="2022/7/10-10:30:12,11,11,11"
 
-#Inicializamos la clase LCD
-lcd = character_lcd.Character_LCD_RGB_I2C(i2c, lcd_columns, lcd_rows)
 
-# Animacion extra en el LCD
-lcd.clear()
-msg = "PROYECTO DE"
-lcd.message = msg
-lcd.cursor_position(0,1)
-msg2 = "SISTEMAS EMBEBIDOS"
-lcd.message = msg2
-#Hacemos un scroll de animacion
-for i in range(5):
-	time.sleep(0.3)
-	lcd.move_left()
-
-lcd.color = [0,0,0]
-lcd.clear()
 
 #Menu z: los 3 menus principales
 #2
@@ -79,7 +80,12 @@ def titulo():
 	lcd.cursor_position(0,0)
 	lcd.message="Est.Meteorologica"
 	lcd.cursor_position(0,1)
-	lcd.message= str(Tiempo_actual.replace("b'","")[2:17])+" "
+	fecha=str(Tiempo_actual.replace("b'",""))
+	fechaDatos=fecha.split(":")
+	minDatos=fechaDatos[1] if int(fechaDatos[1])>9 else "0"+fechaDatos[1]
+	segDatos=fechaDatos[2] if int(fechaDatos[2])>9 else "0"+fechaDatos[2]
+	fechaLcd= str(fechaDatos[0][2:20])+":"str(minDatos)+":"+str(segDatos)
+	lcd.message= str(fechaLcd)
 
 #1
 def menu(temp, hum, luz):
@@ -338,8 +344,8 @@ while True:
 		#Si hay comunicacion con el arduino
 		serialCom() 		#Actualiza los datos
 		step_menus()		#Interfaz de menu mediante botones
-		thingSpeak()		#Envia los datos a thingspeak
-		ubidotsSendData()	#Envia datos a ubidots
+		#thingSpeak()		#Envia los datos a thingspeak
+		#ubidotsSendData()	#Envia datos a ubidots
 		alarma()			#Prende rgb si excede los rangos
 	else:
 		# No hay comunicacion con el arduino
