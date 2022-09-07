@@ -1,0 +1,69 @@
+#Arduino Librerias desde VIsual Studio Code y PIO 
+#Librerias (todas son by Adafruit)
+#Adafruit BusIO
+#Esta libreria nos sirve para la comunicacion UART, I2C y SPI.
+#Adafruit GFX Library 
+#Esta ibreria en complemento se encarga del manejo de pantallas graficas
+#para mostrar desde el arduino.
+#Adafruit SSD1306
+# Libreria para la pantalla Oled monocromatica de 128x64 pixeles
+# utiliza comunicacion i2c
+# funciona en complemento con GFX library.
+#Adafruit unified Sensor
+#Libreria en complemento para el uso de muchos sensores soportados por Adafruit
+# DHT sensor library
+# Libreria para el uso del sensor DHT11 de humedad y temperatura que funciona en
+# complemento con Unified Sensor.
+# RTClib
+# Libreria utilizada para el sensor del reloj con fecha y hora
+# por comunicacion i2c, el que se uso es el DS3231
+
+# Raspberry PI Librerias en Python
+# sudo apt-get update
+# sudo apt-get upgrade
+# Primero instalamos Python
+# sudo apt-get install python-pip
+# sudo apt-get install python3-pip
+# sudo pip3 install pyserial
+# sudo apt-get install python3
+# sudo apt-get update
+# sudo apt-get upgrade
+#
+# En el archivo python importamos las siguientes librerias
+# import serial
+# import time
+# import board
+#
+# Una vez que tenemos instalado Python3, PIP y pyserial podemos empezar a instalar las
+# librerias que nuestro raspberry requiere para el funcionamiento del proyecto, debido
+# a que todos los datos recibe desde comunicacion serial en una cadena de texto, su unica 
+# interfaz es el Char-Lcd-Rgb, asi que instalaremos la libreria de este.
+# 
+# adafruit_character_lcd.character_lcd_rgb_i2c
+# sudo pip3 install adafruit-circuitpython-busdevice
+# Para instalarlo en un unico proyecto se instala de la siguiente manera
+# mkdir project-name && cd project-name
+# python3 -m venv .venv
+# source .venv/bin/activate
+# pip3 install adafruit-circuitpython-busdevice
+# La documentacion para usar todas las propiedades del LCD, De los botones y del rgb
+# estan en el siguiente URL
+# https://docs.circuitpython.org/projects/charlcd/en/latest/examples.html
+# Ahora para usarlo en nuestro raspberry escribimos en el archivo py
+#
+# import adafruit_character_lcd.character_lcd_rgb_i2c as character_lcd
+# 
+# Para la comunicacion de ubidots se incluye en los archivos .py personalizado para el uso
+# como ubidots.py y se lo agrega medianteº
+# import ubidots
+# Para thingspeak se usa la libreria de 
+# import requests
+# para realizar los query
+# from datetime import datetime
+# Para condicionar en que periodos de tiempo se realizaran los envios a ubidots y thingspeak
+# 
+
+
+
+
+
